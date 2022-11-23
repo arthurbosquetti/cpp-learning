@@ -1,0 +1,65 @@
+/* CHAPTER 3: C++ Functions */
+
+
+/* FUNCTION PROTOTYPES
+In order to call a function before the function definition, it is necessary to add the function's prototype
+before the function call. Example:
+
+    returnType functionName(dataType1, ...);                    // function prototype
+    ...
+    main () {
+        ...
+        functionName(dataType1 arg1, ...);                      // function call
+        ...
+    }
+    ...
+    returnType functionName(dataType1 arg1Name, ...) { ... }    // function definition
+*/
+
+
+/* FUNCTION OVERLOADING
+C++ supports function overloading (by type and number of arguments).
+*/
+
+
+/* DEFAULT ARGUMENTS
+The default arguments can be given in the function definition or can be passed by the function's prototype.
+If the  default arguments are defined in the  function definition, the  function must be defined BEFORE the
+function call. Once we provide a default value for a  parameter, all *subsequent* parameters must also have
+default values. The  second argument can only be passed after passing the  first one. If only one  argument
+is passed, it will be considered to be the first one, while the source of the other arguments will be their
+default values. Examples:
+
+    returnType functionName(dataType1 arg1Name = arg1DefaultValue, ...) { ... }    // function definition
+or 
+    returnType functionName(dataType1 arg1Name = arg1DefaultValue, ...);           // function prototype
+*/
+
+
+/* STORAGE CLASS
+- Local variable: lifetime starts at function call, ends when function exits.
+- Global variable: lifetime ends only when the  program ends. Can  be accessed by other files using 'extern'
+  keyword.
+- Static local variable: lifetime  starts when the  function is  called and ends only when the program ends.
+  Even though it's  local, no new variable is created e.g. if a  function containing the  static variable is 
+  called again.
+- Static global variable: lifetime starts only once at the time of declaration, and ends when the program is
+  over. Furthermore, static global variables may not be referenced in any other files.
+*/
+
+
+/* RETURN BY REFERENCE
+Function returns the variable itself (address). Example:
+
+    int num;            // cannot return a local variable
+
+    int& test() {
+        return num;     // cannot return a constant
+    }
+
+    int main() {
+        test() = 5;
+        cout << num;    // prints 5
+        return 0;
+    }
+*/
