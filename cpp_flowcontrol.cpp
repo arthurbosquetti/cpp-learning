@@ -72,12 +72,6 @@ int main(int argc, char *argv[]) {
         cout << "\n";
     }
     
-
-
-
-
-
-
     string result = (run_all) ? "Ran all examples." : "Ran a single example.";
     cout << result << endl;
     cout << "\n";

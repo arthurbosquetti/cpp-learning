@@ -4,7 +4,7 @@
 using namespace std;
 
 
-/* CHAPTER 4: C++ Ararys and Strings */
+/* CHAPTER 5: C++ Structures */
 
 # define NUMBER_OF_EXAMPLES 3
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     bool run_all = (i<0);
 
     if (i >= NUMBER_OF_EXAMPLES) {
-        cout << "ERROR: INVALID EXPERIMENT NUMBER. NUMBER MUST BE i <= " << (NUMBER_OF_EXAMPLES-1) << "." << endl;
+        cout << "ERROR: INVALID EXPERIMENT NUMBER. NUMBER MUST BE 0 <= i <= " << (NUMBER_OF_EXAMPLES-1) << "." << endl;
         return -1;
     }
 
@@ -38,6 +38,19 @@ int main(int argc, char *argv[]) {
         Dog dog = createDog();
         displayData(dog);
     }
+
+    // Enumeration
+    if (i==1 || run_all) {
+        enum grade {HORRIBLE, BAD, AVERAGE, GOOD, EXCELLENT};
+        grade course_evaluation = GOOD;
+        cout << "The course was evaluated " << course_evaluation + 1 << "/5.";
+        
+    }
+
+    string result = (run_all) ? "Ran all examples." : "Ran a single example.";
+    cout << "\n" << result << endl;
+    cout << "\n";
+
 }
 
 Dog createDog()
