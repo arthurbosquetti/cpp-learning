@@ -3,10 +3,12 @@
 
 using namespace std;
 
-
-/* CHAPTER 5: C++ Pointers */
+/* CHAPTER 7: C++ Pointers */
 
 # define NUMBER_OF_EXAMPLES 4
+
+void swapAddress(int *i, int *j);
+void swapNumber(int* i, int* j);
 
 int main(int argc, char *argv[]) {
 
@@ -70,10 +72,11 @@ int main(int argc, char *argv[]) {
         */
        float arr[5]; 
         // Insert data using pointer notation
-        cout << "Enter 5 numbers: ";
+        cout << "Enter 5 numbers (float): ";
         for (int i = 0; i < 5; ++i) {
             // store input number in arr[i]
             cin >> *(arr + i) ; // Equivalent to arr[i]
+        }
         // Values can be displayed using either array or pointer notation:
         cout << "Displaying data: " << endl;
         for (int i = 0; i < 5; ++i) {
@@ -81,27 +84,36 @@ int main(int argc, char *argv[]) {
             cout << *(arr + i) << endl ;
         }
     }
-    /* 
-    FUNCTION CALL BY REFERENCE:
-    
-    Can use reference of values instead of actual values in the function arguments.
-    Either:
-        Pass by reference without pointers. Example:
-            void swap(int &n1, int &n2) {
-                int temp;
-                temp = n1; n1 = n2; n2 = temp;
-            }
-        No need to return since changes are at the address of n1 and n2.
-    Or:
-        Pass by reference with pointers (address of variable). Example:
-            void swap(int* n1, int* n2) {
-                int temp;
-                temp = *n1; *n1 = *n2; *n2 = temp;
-            }
-        Again, no need to return since the changes occur at the address of n1 and n2.
-    */
+    // Pass by pointer, pass by reference
+    if (i==3 || run_all) {
+        int a = 10;
+        int b = 20;
 
+        cout << "Swapping address of a and b..." << endl;
+        swapAddress(&a, &b);
+        cout << "a is " << a << " and b is " << b << endl;
+        
+        cout << "Swapping a and b..." << endl;
+        swapNumber(&a, &b);
+        cout << "a is " << a << " and b is " << b << endl;
+        return 0;
+    }
     string result = (run_all) ? "Ran all examples." : "Ran a single example.";
     cout << result << endl;
     cout << "\n";
+
+}
+// Swap address that i and j point to (does not affect a,b since i,j are copies)
+void swapAddress(int *i, int *j) {
+    int temp = *i;
+    i = j;
+    j = &temp;
+    cout << "*i is " << *i << " and *j is " << *j << endl;
+}
+// Swap values at the addresses of i,j which are the same as a,b. Hence affects a,b.
+void swapNumber(int* i, int* j) {
+    int temp = *i;
+    *i = *j;
+    *j = temp; 
+    cout << "*i is " << *i << " and *j is " << *j << endl;
 }
