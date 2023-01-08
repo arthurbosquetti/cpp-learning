@@ -6,7 +6,7 @@ using namespace std;
 
 /* CHAPTER 5: C++ Structures */
 
-# define NUMBER_OF_EXAMPLES 3
+# define NUMBER_OF_EXAMPLES 2
 
 struct Dog
     {
@@ -43,8 +43,8 @@ int main(int argc, char *argv[]) {
     if (i==1 || run_all) {
         enum grade {HORRIBLE, BAD, AVERAGE, GOOD, EXCELLENT};
         grade course_evaluation = GOOD;
-        cout << "The course was evaluated " << course_evaluation + 1 << "/5.";
-        
+        cout << "The course was evaluated " << course_evaluation + 1 << "/5." << endl;
+        cout << "\n";
     }
 
     string result = (run_all) ? "Ran all examples." : "Ran a single example.";
@@ -72,5 +72,5 @@ void displayData(Dog &d) {
     cout << "\nDisplaying Information:" << endl;
     cout << "Name: " << d.name << endl;
     cout <<"Breed: " << d.breed << endl;
-    cout << "Age: " << d.age;
+    cout << "Age : " << d.age;
 }
