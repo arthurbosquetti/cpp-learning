@@ -5,7 +5,7 @@ using namespace std;
 
 /* CHAPTER 7: C++ Pointers */
 
-# define NUMBER_OF_EXAMPLES 4
+# define NUMBER_OF_EXAMPLES 5
 
 void swapAddress(int *i, int *j);
 void swapNumber(int* i, int* j);
@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
         cout << "pointVar points to: *pointVar = " << *pointVar << endl;    // The dereference operator
         cout << "\n";
     }
+
     // Pointers to structs
     if (i==1 || run_all) {
         cout << "Using pointers on structs:" << endl;
@@ -57,6 +58,7 @@ int main(int argc, char *argv[]) {
         cout << "But the '->' operators is more preferable since '.' has higher precedence over '*' and avoids errors in the code." << endl;
         cout << "\n";
     }
+
     // Pointers and arrays
     if (i==2 || run_all) {
         /* 
@@ -84,7 +86,8 @@ int main(int argc, char *argv[]) {
             cout << *(arr + i) << endl ;
         }
     }
-    // Pass by pointer, pass by reference
+
+    // Pass by pointer
     if (i==3 || run_all) {
         int a = 10;
         int b = 20;
@@ -98,13 +101,29 @@ int main(int argc, char *argv[]) {
         cout << "a is " << a << " and b is " << b << endl;
         return 0;
     }
+
+    // Memory management
+    if (i==4 || run_all) {
+        // allocate and deallocate memory manually using the 'new' and 'delete' operators
+        // dataType* pointerVariable = new dataType; (returns the address of the memory location)
+        int* pointerVariable = new int;
+        *pointerVariable = 45;
+        cout << "The delete operator is used to deallocate memory. For example:" << endl;
+        cout << "pointerVariable = " << pointerVariable << ", *pointerVariable = " << *pointerVariable << endl;
+        cout << "Deleting pointerVariable..." << endl;
+        delete pointerVariable;
+        cout << "Deallocating the memory gives control of the memory backt to the OS." << endl;
+        cout << "Reading or writing to this memory address will give UNDEFINED BEHAVIOR!" << endl;
+        cout << "\n";
+    }
+
     string result = (run_all) ? "Ran all examples." : "Ran a single example.";
     cout << result << endl;
     cout << "\n";
 
 }
 // Swap address that i and j point to (does not affect a,b since i,j are copies)
-void swapAddress(int *i, int *j) {
+void swapAddress(int* i, int* j) {
     int temp = *i;
     i = j;
     j = &temp;
