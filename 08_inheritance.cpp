@@ -18,6 +18,10 @@ class Person {
         void introduce() {
             cout << "Hi, my name is " << name << " and I am " << age << " y/o." << endl;
         }
+        // virtual keyword is used for functions that will be redefined in derived classes
+        virtual void print() {
+            cout << "Person is printing..." << endl;
+        }
 };
 
 class Student : public Person {
@@ -37,6 +41,13 @@ class Student : public Person {
         void introduceAcademicInfo() {
             cout << "I study at " << university << " and my GPA is " << gpa << "." << endl;
         }
+        void introduce() {
+            Person::introduce();
+            introduceAcademicInfo();
+        }
+        void print() override {
+            cout << "Student is printing..." << endl;
+        }
 };
 
 int main(int argc, char *argv[]) {
@@ -54,18 +65,32 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    // Inheritance
+    Student student;
+    student.setName("Joseph");
+    student.setAge(26);
+    student.setGpa(3.7);
+    student.setUniversity("DTU");
+
+    // Inheritance and function overriding:
     if (i==0 || run_all) {
-        Student student;
-        student.setName("Joseph");
-        student.setAge(26);
-        student.setGpa(3.7);
-        student.setUniversity("DTU");
+        cout << "Introducing myself as a Person:" << endl;
+        student.Person::introduce();
+        cout << "Introducing myself as a Student:" << endl;
         student.introduce();
-        student.introduceAcademicInfo();
-        cout << "\n";
+        cout << "\n";   
     }
 
+    // Calling override function using pointer, and virtual keyword: 
+    if (i==1 || run_all) {
+        Person* person = &student;
+        person->introduce();
+        cout << "When we use the 'virtual' keyword, we ensure that pointers of the base class that\n";
+        cout << "point to an object of the derived class will call the new version of the function.\n";
+        person->print();
+    }
+
+    // Friend function:
+    // ...
 
 
     string result = (run_all) ? "Ran all examples." : "Ran a single example.";
