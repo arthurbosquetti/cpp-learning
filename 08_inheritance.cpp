@@ -7,6 +7,7 @@ using namespace std;
 
 # define NUMBER_OF_EXAMPLES 4
 
+// Classes for examples 0 and 1
 class Person {
     protected:
         int age;
@@ -50,6 +51,54 @@ class Student : public Person {
         }
 };
 
+// Classes and functions for example 2
+class ClassB;
+class ClassA {
+    public:
+        ClassA() : numA(12) {}
+    private:
+        int numA;
+         // friend function declaration
+         friend int add(ClassA, ClassB);
+};
+
+class ClassB {
+    public:
+        ClassB() : numB(1) {}    
+    private:
+        int numB;
+        // friend function declaration
+        friend int add(ClassA, ClassB);
+};
+
+int add(ClassA objectA, ClassB objectB) {
+    return (objectA.numA + objectB.numB);
+}
+
+// Class for example 3
+template <class T>
+class Calculator {
+    private:
+        T num1, num2;
+    public:
+        Calculator(T num1, T num2) {
+            this->num1 = num1;
+            this->num2 = num2;
+        }
+        T add() {return num1 + num2;}
+        T subtract() {return num1 + num2;}
+        T multiply() {return num1 * num2;}
+        T divide() {return num1 / num2;}
+
+        void displayResults() {
+            cout << "Numbers: " << num1 << " and " << num2 << "." << endl;
+            cout << "+: " << add() << endl;
+            cout << "-: " << subtract() << endl;
+            cout << "*: " << multiply() << endl;
+            cout << "/: " << divide() << endl;
+        }
+};
+
 int main(int argc, char *argv[]) {
 
     if (argc==1) {
@@ -90,11 +139,36 @@ int main(int argc, char *argv[]) {
     }
 
     // Friend function:
-    // ...
+    if (i==2 || run_all) {
+        cout << "When two classes declare a function f as a friend function, this function can access\n";
+        cout << "private data of both classes" << endl;
+        ClassA objectA;
+        ClassB objectB;
+        cout << "Sum: " << add(objectA, objectB) << endl;
+        cout << "When a class B is declared a friend class in A, all members of A can be accessed\n";
+        cout << "from inside B (but not vice versa)." << endl;
+        cout <<"\n";
+    }
 
+    // Class Templates
+    if (i==3 || run_all) {
+        Calculator<int> intCalculator(2, 1);
+        Calculator<float> floatCalculator(2.1, 1.2);
+        
+        cout << "Int results: " << endl;
+        intCalculator.displayResults();
+
+        cout << "Float results: " << endl;
+        floatCalculator.displayResults();
+
+        cout << "We can also have class templates with multiple or default parameters. Ex:\n";
+        cout << "'template <class T, class U, class V = int', where type int is the default for V\n";
+        cout << "but can be replaced when an object is created." << endl; 
+        cout <<"\n";
+}
 
     string result = (run_all) ? "Ran all examples." : "Ran a single example.";
     cout << result << endl;
     cout << "\n";
-
 }
+
